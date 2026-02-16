@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - HostelConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">HostelConnect</a>
+            <div class="nav-links hidden-mobile">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="active">Contact</a>
+                <a href="login.html" class="btn btn-sm btn-primary">Login</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">🌙</button>
+                <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open Menu">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" style="padding: 3rem 0;">
+        <div class="container">
+            <h1>Contact Support</h1>
+            <p>Have questions? We're here to help.</p>
+        </div>
+    </section>
+
+    <div class="container" style="padding: 3rem 1.5rem;">
+        <div class="feature-card" style="max-width: 600px; margin: 0 auto;">
+            <form id="contact-form" onsubmit="event.preventDefault(); alert('Message sent!');">
+                <div style="margin-bottom: 1rem;">
+                    <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Name</label>
+                    <input type="text" id="name" required
+                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email</label>
+                    <input type="email" id="email" required
+                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="message"
+                        style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Message</label>
+                    <textarea id="message" rows="5" required
+                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main); font-family: inherit;"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+            </form>
+
+            <div
+                style="margin-top: 2rem; text-align: center; color: var(--text-muted); padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                <p>Email: support@hostelconnect.edu</p>
+                <p>Phone: +1 (555) 123-4567</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 HostelConnect. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

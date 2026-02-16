@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - HostelConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: calc(100vh - 72px);
+        }
+
+        .sidebar {
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+        }
+
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .menu-item {
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background-color: rgba(79, 70, 229, 0.1);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .main-content {
+            padding: 2rem;
+            background-color: var(--bg-body);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-submitted {
+            background-color: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .status-review {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .status-progress {
+            background-color: #D1FAE5;
+            color: #065F46;
+        }
+
+        .status-resolved {
+            background-color: #E0E7FF;
+            color: #3730A3;
+        }
+
+        .status-closed {
+            background-color: #F3F4F6;
+            color: #374151;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">HostelConnect <span
+                    style="font-size: 0.75rem; background: var(--secondary-color); color: white; padding: 2px 6px; border-radius: 4px; vertical-align: middle;">ADMIN</span></a>
+            <div class="flex items-center gap-4">
+                <span id="admin-greeting" style="font-size: 0.875rem; font-weight: 500;">Hello, Admin</span>
+                <button id="logout-btn" class="btn btn-sm btn-outline">Logout</button>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">🌙</button>
+                <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open Menu">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-menu">
+                <div class="menu-item active" data-section="all-complaints">
+                    📊 Dashboard
+                </div>
+                <div class="menu-item" data-section="validate-registrations">
+                    👥 Validate Users
+                </div>
+                <div class="menu-item" data-section="manage-users">
+                    👨‍🎓 All Students
+                </div>
+                <div class="menu-item" data-section="profile">
+                    👤 Admin Profile
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- All Complaints Section -->
+            <section id="all-complaints" class="section active">
+                <h2 style="margin-bottom: 1.5rem;">Complaint Overview</h2>
+
+                <div class="feature-card" style="margin-bottom: 2rem;">
+                    <div class="filters">
+                        <label style="font-weight: 500;">Filter Status:</label>
+                        <select id="status-filter"
+                            style="padding: 0.5rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                            <option value="All">All</option>
+                            <option value="Submitted">Submitted</option>
+                            <option value="Under Review">Under Review</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Resolved">Resolved</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                        <label style="font-weight: 500;">Filter Urgency:</label>
+                        <select id="urgency-filter"
+                            style="padding: 0.5rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                            <option value="All">All</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border-color);">
+                                    <th style="padding: 1rem;">ID</th>
+                                    <th style="padding: 1rem;">User</th>
+                                    <th style="padding: 1rem;">Title</th>
+                                    <th style="padding: 1rem;">Urgency</th>
+                                    <th style="padding: 1rem;">Date</th>
+                                    <th style="padding: 1rem;">Status</th>
+                                    <th style="padding: 1rem;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-complaints-table">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Validate Registrations Section -->
+            <section id="validate-registrations" class="section">
+                <h2 style="margin-bottom: 1.5rem;">Validate New Registrations</h2>
+                <div class="feature-card">
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border-color);">
+                                    <th style="padding: 1rem;">Name</th>
+                                    <th style="padding: 1rem;">Username</th>
+                                    <th style="padding: 1rem;">Hostel/Room</th>
+                                    <th style="padding: 1rem;">Status</th>
+                                    <th style="padding: 1rem;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="user-validation-table">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- All Users Section -->
+            <section id="manage-users" class="section">
+                <h2 style="margin-bottom: 1.5rem;">All Students</h2>
+                <div class="feature-card">
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border-color);">
+                                    <th style="padding: 1rem;">Name</th>
+                                    <th style="padding: 1rem;">Username</th>
+                                    <th style="padding: 1rem;">Hostel/Room</th>
+                                    <th style="padding: 1rem;">Phone</th>
+                                    <th style="padding: 1rem;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="all-users-table">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="section">
+                <h2 style="margin-bottom: 1.5rem;">Admin Profile</h2>
+                <div class="feature-card" style="max-width: 600px;">
+                    <form id="profile-form">
+                        <div class="flex items-center gap-4" style="margin-bottom: 2rem;">
+                            <div style="position: relative;">
+                                <img id="profile-img-display" src="" alt="Profile"
+                                    style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; background-color: var(--secondary-color); display: none;">
+                                <div id="profile-icon-display"
+                                    style="width: 80px; height: 80px; background-color: var(--secondary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">
+                                    🛡️</div>
+                                <label for="profile-pic-input"
+                                    style="position: absolute; bottom: 0; right: 0; background: var(--text-main); color: var(--bg-body); border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.8rem;">✏️</label>
+                                <input type="file" id="profile-pic-input" accept="image/*" style="display: none;">
+                            </div>
+                            <div>
+                                <h3 id="profile-name-display">System Administrator</h3>
+                                <p class="text-muted" id="profile-role-display">Super Admin</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Full Name</label>
+                            <input type="text" id="profile-name" value="System Administrator"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                        </div>
+
+                        <div style="margin-bottom: 1rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Phone Number</label>
+                            <input type="tel" id="profile-phone" value="987-654-3210"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Office
+                                Location</label>
+                            <input type="text" id="profile-office" value="Main Administrative Block"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/admin_dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - HostelConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">HostelConnect</a>
+            <div class="nav-links hidden-mobile">
+                <a href="index.html">Home</a>
+                <a href="about.html" class="active">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html" class="btn btn-sm btn-primary">Login</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">🌙</button>
+                <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Open Menu">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" style="padding: 3rem 0;">
+        <div class="container">
+            <h1>About HostelConnect</h1>
+            <p>Empowering students and wardens with efficient communication.</p>
+        </div>
+    </section>
+
+    <div class="container" style="padding: 3rem 1.5rem;">
+        <div class="flex gap-4" style="flex-direction: column; max-width: 800px; margin: 0 auto;">
+            <div class="feature-card">
+                <h3>Our Mission</h3>
+                <p class="text-muted">
+                    To revolutionize hostel management by providing a transparent, efficient, and prioritized complaint
+                    resolution system.
+                    We believe that a comfortable living environment is essential for academic success.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>How It Works</h3>
+                <p class="text-muted">
+                    HostelConnect uses a smart algorithm to categorize and prioritize complaints.
+                    Urgent issues like electrical failures or water leakage are flagged for immediate attention,
+                    while routine maintenance requests are scheduled accordingly.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <h3>For Students</h3>
+                <ul class="text-muted" style="list-style: disc; padding-left: 1.5rem;">
+                    <li>Easy complaint submission</li>
+                    <li>Real-time status tracking</li>
+                    <li>Transparency in resolution process</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>For Administration</h3>
+                <ul class="text-muted" style="list-style: disc; padding-left: 1.5rem;">
+                    <li>Centralized dashboard</li>
+                    <li>Automated prioritization</li>
+                    <li>Data-driven insights</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 HostelConnect. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
