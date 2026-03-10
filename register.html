@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body style="height: 100vh; display: flex; flex-direction: column;">
+<body class="auth-page-body">
     <nav class="navbar">
         <div class="container nav-container">
             <a href="index.html" class="logo">HostelConnect</a>
@@ -27,68 +27,57 @@
         </div>
     </nav>
 
-    <div
-        style="flex: 1; display: flex; align-items: center; justify-content: center; background: var(--bg-body); padding: 2rem 0;">
-        <div class="feature-card" style="width: 100%; max-width: 500px; padding: 2.5rem;">
-            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary-color);">Student Registration</h2>
+    <div class="auth-container register">
+        <div class="feature-card auth-card register">
+            <h2 class="auth-title">Student Registration</h2>
 
             <form id="register-form">
-                <div class="grid gap-4" style="grid-template-columns: 1fr 1fr; margin-bottom: 1rem;">
+                <div class="grid gap-4 form-group" style="grid-template-columns: 1fr 1fr;">
                     <div>
-                        <label for="reg-name" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Full
-                            Name</label>
-                        <input type="text" id="reg-name" required placeholder="John Doe"
-                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                        <label for="reg-name" class="form-label">Full Name</label>
+                        <input type="text" id="reg-name" required placeholder="Leo Das" class="form-input">
                     </div>
                     <div>
-                        <label for="reg-roll" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Roll
-                            Number</label>
-                        <input type="text" id="reg-roll" required placeholder="123456"
-                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                        <label for="reg-roll" class="form-label">Roll Number</label>
+                        <input type="text" id="reg-roll" required placeholder="123456" class="form-input">
                     </div>
                 </div>
 
-                <div style="margin-bottom: 1rem;">
-                    <label for="reg-hostel" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Hostel
-                        Block / Room</label>
-                    <input type="text" id="reg-hostel" required placeholder="Block A - 101"
-                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                <div class="form-group">
+                    <label for="reg-hostel" class="form-label">Hostel Block / Room</label>
+                    <input type="text" id="reg-hostel" required placeholder="Block A - 101" class="form-input">
                 </div>
 
-                <div style="margin-bottom: 1rem;">
-                    <label for="reg-username"
-                        style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Username</label>
-                    <input type="text" id="reg-username" required placeholder="Choose a username"
-                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                <div class="form-group">
+                    <label for="reg-username" class="form-label">Username</label>
+                    <input type="text" id="reg-username" required placeholder="Choose a username" class="form-input">
                 </div>
 
-                <div style="margin-bottom: 1.5rem;">
-                    <label for="reg-password"
-                        style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Password</label>
+                <div class="form-group mb-lg">
+                    <label for="reg-password" class="form-label">Password</label>
                     <input type="password" id="reg-password" required placeholder="Choose a password"
-                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                        class="form-input">
                 </div>
 
-                <div id="reg-msg"
-                    style="color: var(--secondary-color); font-size: 0.875rem; margin-bottom: 1rem; text-align: center; display: none;">
+                <div id="reg-msg" class="auth-success">
                     Registration successful! Please wait for admin approval.
                 </div>
-                <div id="reg-error"
-                    style="color: var(--danger-color); font-size: 0.875rem; margin-bottom: 1rem; text-align: center; display: none;">
+                <div id="reg-error" class="auth-error">
                     Username already exists.
                 </div>
 
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Register</button>
+                <button type="submit" class="btn btn-primary auth-btn">Register</button>
             </form>
 
-            <p style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: var(--text-muted);">
-                Already have an account? <a href="login.html" style="color: var(--primary-color);">Login here</a>
+            <p class="auth-footer">
+                Already have an account? <a href="user-login.html" class="auth-link">Login here</a>
             </p>
         </div>
     </div>
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/auth.js"></script>
+    <script type="module" src="backend.js" defer></script>
 </body>
 
 </html>

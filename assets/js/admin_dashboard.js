@@ -151,17 +151,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- All Users Logic ---
+    window.deleteStudent = (username) => {
+        if (!confirm(`Delete student "${username}"? This will also remove all their complaints and cannot be undone.`)) return;
+
+        // Remove user
+        let users = JSON.parse(localStorage.getItem('users') || '[]');
+        users = users.filter(u => u.username !== username);
+        localStorage.setItem('users', JSON.stringify(users));
+
+        // Remove their complaints
+        let complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+        complaints = complaints.filter(c => c.user !== username);
+        localStorage.setItem('complaints', JSON.stringify(complaints));
+
+        loadAllUsers();
+        loadComplaints(); // Refresh complaints view too
+        alert(`Student "${username}" has been deleted.`);
+    };
+
     function loadAllUsers() {
         const users = JSON.parse(localStorage.getItem('users') || '[]');
-        // Filter out admins if you only want to see students, or keep them. Let's keep students only for clarity/simplicity
         const students = users.filter(u => u.role === 'user');
         const tbody = document.getElementById('all-users-table');
 
         tbody.innerHTML = '';
 
         if (students.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" style="padding: 1rem; text-align: center; color: var(--text-muted);">No students registered.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="6" style="padding: 1rem; text-align: center; color: var(--text-muted);">No students registered.</td></tr>';
             return;
         }
 
@@ -180,6 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">${u.phone || '-'}</td>
                 <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">
                     ${statusBadge}
+                </td>
+                <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">
+                    <button onclick="deleteStudent('${u.username}')" style="padding: 0.3rem 0.75rem; background: var(--danger-color); color: white; border: none; border-radius: var(--radius-md); cursor: pointer; font-size: 0.8rem; font-weight: 500;">🗑 Delete</button>
                 </td>
             `;
             tbody.appendChild(tr);

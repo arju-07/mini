@@ -112,6 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
         loadComplaints(); // Refresh list
     });
 
+    // Delete Complaint
+    window.deleteComplaint = (id) => {
+        if (!confirm('Are you sure you want to delete this complaint?')) return;
+        const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+        const updated = complaints.filter(c => c.id !== id);
+        localStorage.setItem('complaints', JSON.stringify(updated));
+        loadComplaints();
+    };
+
     // Load Complaints
     function loadComplaints() {
         const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
@@ -121,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tbody.innerHTML = '';
 
         if (userComplaints.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" style="padding: 1rem; text-align: center; color: var(--text-muted);">No complaints submitted yet.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="6" style="padding: 1rem; text-align: center; color: var(--text-muted);">No complaints submitted yet.</td></tr>';
             return;
         }
 
@@ -132,6 +141,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (c.status === 'Resolved') statusClass = 'status-resolved';
             if (c.status === 'Closed') statusClass = 'status-closed';
 
+            // Delete only allowed when status is still 'Submitted' (admin hasn't acted)
+            const canDelete = c.status === 'Submitted';
+            const deleteBtn = canDelete
+                ? `<button onclick="deleteComplaint('${c.id}')" style="padding: 0.3rem 0.75rem; background: var(--danger-color); color: white; border: none; border-radius: var(--radius-md); cursor: pointer; font-size: 0.8rem; font-weight: 500;">🗑 Delete</button>`
+                : `<span style="font-size: 0.75rem; color: var(--text-muted);">—</span>`;
+
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">#${c.id.slice(-4)}</td>
@@ -141,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">
                     <span class="status-badge ${statusClass}">${c.status}</span>
                 </td>
+                <td style="padding: 1rem; border-bottom: 1px solid var(--border-color);">${deleteBtn}</td>
             `;
             tbody.appendChild(tr);
         });

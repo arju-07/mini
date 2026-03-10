@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body style="height: 100vh; display: flex; flex-direction: column;">
+<body class="auth-page-body">
     <nav class="navbar">
         <div class="container nav-container">
             <a href="index.html" class="logo">HostelConnect</a>
@@ -24,34 +24,26 @@
         </div>
     </nav>
 
-    <div style="flex: 1; display: flex; align-items: center; justify-content: center; background: var(--bg-body);">
-        <div class="feature-card"
-            style="width: 100%; max-width: 400px; padding: 2.5rem; border-top: 4px solid var(--accent-color);">
-            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--text-main);">Admin Portal</h2>
+    <div class="auth-container">
+        <div class="feature-card auth-card admin">
+            <h2 class="auth-title admin-title">Admin Portal</h2>
 
             <form id="login-form">
-                <div style="margin-bottom: 1rem;">
-                    <label for="username"
-                        style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Username</label>
-                    <input type="text" id="username" required placeholder="admin"
-                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" required placeholder="admin" class="form-input">
                 </div>
 
-                <div style="margin-bottom: 1.5rem;">
-                    <label for="password"
-                        style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Password</label>
-                    <input type="password" id="password" required placeholder="admin123"
-                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-body); color: var(--text-main);">
+                <div class="form-group mb-lg">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" required placeholder="admin123" class="form-input">
                 </div>
 
-                <div id="error-msg"
-                    style="color: var(--danger-color); font-size: 0.875rem; margin-bottom: 1rem; text-align: center; display: none;">
+                <div id="error-msg" class="auth-error">
                     Invalid admin credentials
                 </div>
 
-                <button type="submit" class="btn btn-primary"
-                    style="background-color: var(--text-main); color: var(--bg-body); width: 100%;">Login as
-                    Admin</button>
+                <button type="submit" class="btn btn-primary auth-btn admin-btn">Login as Admin</button>
             </form>
         </div>
     </div>
